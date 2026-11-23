@@ -133,7 +133,7 @@ const MAX=Math.max(...DAYS.map(d=>d[1]));
 const cvs=document.getElementById('c'),ctx=cvs.getContext('2d');
 let W,H;
 function resize(){W=cvs.width=innerWidth*devicePixelRatio;H=cvs.height=innerHeight*devicePixelRatio;cvs.style.width=innerWidth+'px';cvs.style.height=innerHeight+'px';build()}
-addEventListener('resize',resize);
+addEventListener('resize',resize);resize();
 
 let ramps=[];
 function build(){
