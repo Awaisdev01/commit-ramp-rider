@@ -375,10 +375,10 @@ function loop(t){
 requestAnimationFrame(loop);
 
 // ---- input ----
-document.getElementById('start').addEventListener('click',function(){
-  this.classList.add('hide');started=true;
-  if(!actx)engineSound();muted=false;document.getElementById('mute').textContent='🔊';
-});
+document.getElementById('start').addEventListener('click',function(){startGame()});
+function startGame(){document.getElementById('start').classList.add('hide');started=true;
+  if(!actx)engineSound();muted=new URLSearchParams(location.search).has('mute');document.getElementById('mute').textContent=muted?'🔇':'🔊';
+  if(!muted)actx.resume()}
 document.addEventListener('keydown',e=>{
   if(e.code==='Space'){boostHeld=true;e.preventDefault()}
 });
