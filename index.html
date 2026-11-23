@@ -379,6 +379,7 @@ document.getElementById('start').addEventListener('click',function(){startGame()
 function startGame(){document.getElementById('start').classList.add('hide');started=true;
   if(!actx)engineSound();muted=new URLSearchParams(location.search).has('mute');document.getElementById('mute').textContent=muted?'🔇':'🔊';
   if(!muted)actx.resume()}
+if(new URLSearchParams(location.search).has('autostart'))startGame();
 document.addEventListener('keydown',e=>{
   if(e.code==='Space'){boostHeld=true;e.preventDefault()}
 });
