@@ -133,9 +133,10 @@ const MAX=Math.max(...DAYS.map(d=>d[1]));
 const cvs=document.getElementById('c'),ctx=cvs.getContext('2d');
 let W,H;
 function resize(){W=cvs.width=innerWidth*devicePixelRatio;H=cvs.height=innerHeight*devicePixelRatio;cvs.style.width=innerWidth+'px';cvs.style.height=innerHeight+'px';build()}
-addEventListener('resize',resize);resize();
+addEventListener('resize',resize);
 
 let ramps=[];
+resize();
 function build(){
   const dpr=devicePixelRatio;
   ramps=DAYS.map(([label,n])=>({label,n,h:Math.max(22*dpr,26*dpr+Math.pow(n/MAX,0.8)*(H*0.32))}));
@@ -377,8 +378,8 @@ requestAnimationFrame(loop);
 // ---- input ----
 document.getElementById('start').addEventListener('click',function(){startGame()});
 function startGame(){document.getElementById('start').classList.add('hide');started=true;
-  if(!actx)engineSound();muted=new URLSearchParams(location.search).has('mute');document.getElementById('mute').textContent=muted?'🔇':'🔊';
-  if(!muted)actx.resume()}
+  try{if(!actx)engineSound();muted=new URLSearchParams(location.search).has('mute');document.getElementById('mute').textContent=muted?'🔇':'🔊';
+  if(!muted)actx.resume()}catch(e){/* no audio device — stay silent */}}
 if(new URLSearchParams(location.search).has('autostart'))startGame();
 document.addEventListener('keydown',e=>{
   if(e.code==='Space'){boostHeld=true;e.preventDefault()}
